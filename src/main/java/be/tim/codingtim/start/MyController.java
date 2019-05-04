@@ -1,5 +1,7 @@
-package be.tim.codingtim;
+package be.tim.codingtim.start;
 
+import be.tim.codingtim.common.PersonalisedContent;
+import be.tim.codingtim.common.PersonalizationService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

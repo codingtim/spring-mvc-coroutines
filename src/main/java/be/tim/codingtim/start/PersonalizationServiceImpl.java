@@ -1,8 +1,17 @@
-package be.tim.codingtim;
+package be.tim.codingtim.start;
+
+import be.tim.codingtim.common.PersonalisedContent;
+import be.tim.codingtim.common.PersonalizationService;
+import be.tim.codingtim.common.User;
+import be.tim.codingtim.common.UserRepository;
 
 public class PersonalizationServiceImpl implements PersonalizationService {
 
     private UserRepository repository;
+
+    public PersonalizationServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public PersonalisedContent getContentFor(String username) {
@@ -12,6 +21,6 @@ public class PersonalizationServiceImpl implements PersonalizationService {
     }
 
     private PersonalisedContent calculateContent(User user) {
-        return null;
+        return new PersonalisedContent(user.getUsername());
     }
 }

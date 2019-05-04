@@ -1,4 +1,4 @@
-package be.tim.codingtim;
+package be.tim.codingtim.common;
 
 public interface UserRepository {
 

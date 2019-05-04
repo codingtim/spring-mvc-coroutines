@@ -1,9 +1,9 @@
-package be.tim.codingtim;
+package be.tim.codingtim.common;
 
-class PersonalisedContent {
+public class PersonalisedContent {
     String value;
 
-    PersonalisedContent(String value) {
+    public PersonalisedContent(String value) {
         this.value = value;
     }
 

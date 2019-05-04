@@ -1,14 +1,25 @@
 package be.tim.codingtim.coroutine
 
 import be.tim.codingtim.common.PersonalisedContent
-import be.tim.codingtim.common.PersonalizationService
 import be.tim.codingtim.common.User
 import be.tim.codingtim.common.UserRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.slf4j.LoggerFactory
 
-class PersonalizationServiceImpl(private val repository: UserRepository): PersonalizationService {
+class PersonalizationServiceImpl(private val repository: UserRepository): NonBlockingPersonalizationService {
 
-    override fun getContentFor(username: String): PersonalisedContent {
-        val user = repository.getUser(username)
+    private val logger = LoggerFactory.getLogger(PersonalizationServiceImpl::class.java)
+
+    override suspend fun getContentFor(username: String): PersonalisedContent {
+        logger.info("Inside service")
+        //https://medium.com/@elizarov/blocking-threads-suspending-coroutines-d33e11bf4761
+        val user = withContext(Dispatchers.IO) {
+            logger.info("Calling repository")
+            val user = repository.getUser(username)
+            user
+        }
+        logger.info("Calculating content")
         return calculateContent(user)
     }
 
